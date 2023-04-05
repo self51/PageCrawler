@@ -17,8 +17,11 @@ This is a pet-project, it should not be used for commercial purposes!
 * Make sure you have Redis installed, set up Redis;
 * Set up Telegram API;
   * You need to have: TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID;
+* Make sure you have a www.tesmanian.com account 
+  * (you need a password and email address in .env)
 * Create your .env file;
-  * File must contain: TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID, REDIS_HOST, REDIS_PORT;
+  * File must contain: TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID, 
+  * REDIS_HOST, REDIS_PORT, PASSWORD, EMAIL;
 * `$ pip install -r requirements.txt`.
 
 Made by `Self`.

@@ -19,11 +19,30 @@ redis_key = 'previous_titles'
 bot = Bot(token=env('TELEGRAM_BOT_TOKEN'))
 chat_id = env('TELEGRAM_CHAT_ID')
 
+# Set up persistent session
+session = requests.Session()
+
+
+def log_in():
+    login_url = 'https://www.tesmanian.com/account/login?return_url=%2Faccount'
+    response = session.post(login_url, data={'email': env('EMAIL'), 'password': env('PASSWORD')})
+
+    if '_secure_session_id' not in session.cookies:
+        print('Login failed')
+    else:
+        print('Login successful')
+
+    return response
+
 
 # Scrapes recent articles and add them to redis
 def get_latest_article():
+    # checks if you are logged in
+    if '_secure_session_id' not in session.cookies:
+        log_in()
+
     url = 'https://www.tesmanian.com/'
-    response = requests.get(url)
+    response = session.get(url)
     soup = BeautifulSoup(response.content, 'html.parser')
 
     latest_article = set()
